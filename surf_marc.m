@@ -1,0 +1,24 @@
+[K, M]=meshgrid(100:100:1000,0.1:0.1:0.9);
+
+ figure;
+ surf(K',M',Ds);
+% contourf(K',M',Dh);
+% figure;
+% surf(K',M',Ds);
+% contourf(K',M',Ds);
+figure;
+% contourf(K',M',Dhs,30);
+% figure;
+contourf(K',M',Ds,10);
+% figure;
+% contourf(K',M',Dh,10);
+% figure;
+% contourf(K',M',Dhsold,10);
+% figure;
+% contourf(K',M',Dhs2,10);
+%  figure;
+% surf(K',M',Ds);
+colorbar;
+title('');
+xlabel('');
+ylabel('');

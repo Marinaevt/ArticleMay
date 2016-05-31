@@ -301,3 +301,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+#Ignore optimezer's out files
+out*.txt
