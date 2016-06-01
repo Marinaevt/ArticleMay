@@ -123,8 +123,8 @@ int main(){
 	foutF << F;
 	cout << exp(x.at(0)) << "," << exp(x.at(1)) << "," << F <<endl;
 	double dm = 0.1, dk = 100;
-	for (double i = dm*4; i <= 0.6; i += dm/10) {
-		for (double j = dk; j <= 500; j += dk/10) {
+	for (double i = dm; i <= 0.9; i += dm/10) {
+		for (double j = dk; j <= 1000; j += dk/10) {
 			x[0] = log(j);
 			x[1] = log(i);
 			equation->Init(x);
@@ -177,7 +177,11 @@ double f(vector<CPoint> &data, CDomeHeight &H, double A){
 		//double dHErr = Euler(0, data[i].S0, data[i].t, &H, 0.5, 0.5);
 		//double dHErr = (data[i].H - ddH)/data[i].H;
 		//double dHErr = Euler1(0, data[i].S0, data[i].t, data[i].H, &H, data[i].t*0.001, data[i].H*0.01);
+#if CRUTCH
+		double dHErr = Runge1(0, data[i].S0, data[i].t, data[i].H, &H, data[i].t*0.01, data[i].H*0.1, data[i].H + data[i].Rho0);
+#else
 		double dHErr = Runge1(0, data[i].S0, data[i].t, data[i].H, &H, data[i].t*0.01, data[i].H*0.1);
+#endif
 		//double dHErr = Euler1(0, data[i].S0, data[i].t, data[i].H, &H, 0.5, 0.5);
 		double dS = (data[i].S - H.m_dCurrentS)/data[i].S;
 		//val+= dHErr+dS*dS;

@@ -9,7 +9,7 @@ using namespace std;
 
 const double step = 0.001;
 
-#define CRUTCH 0
+#define CRUTCH 1
 
 
 
@@ -174,7 +174,11 @@ double Euler1(double x0, double F0, double x1,  double F1, CFunction *F, double 
 }
 
 /////////////////////////////////////////////////////////////////////////////////
-double Runge1(double x0, double F0, double x1,  double F1, CFunction *F, double dx, double dMaxdF){
+#if CRUTCH
+	double Runge1(double x0, double F0, double x1,  double F1, CFunction *F, double dx, double dMaxdF, double maxH){
+#else
+	double Runge1(double x0, double F0, double x1, double F1, CFunction *F, double dx, double dMaxdF){
+#endif
 
 	/*&*/ofstream fout("out_P3.txt", ios::app);  // הכÿ ÀÌד - 6
 	//ofstream fout("out_P3.5.txt", ios::app);
@@ -191,12 +195,16 @@ double Runge1(double x0, double F0, double x1,  double F1, CFunction *F, double 
 	double dErr = (F0-F1)*(F0-F1)/F1/F1 + (x0-x1)*(x0-x1)/x1/x1, ddErr=-1;
 	double dErrMin = dErr;
 	bool bLeft1=true;
+#if CRUTCH
 	bool flag = 1;
+#endif
 	int nLeft=0;
 #if CRUTCH
 	double Hk = F->GetCurrentH();
+	while ((x0 + 2 * dx0<x1 || ddErr<0) && (dx0>0) && flag) {
+#else
+	while ((x0 + 2 * dx0<x1 || ddErr<0) && dx0>0) {
 #endif
-	while((x0+2*dx0<x1 || ddErr<0) && (dx0>0) && flag){
 		dx = dx0;
 		if(x0+dx>=x1 && bLeft1){
 			dx = x1-x0;
@@ -235,7 +243,7 @@ double Runge1(double x0, double F0, double x1,  double F1, CFunction *F, double 
 			dx0*=0.5;
 		}
 #if CRUTCH
-		if (Hk != F->GetCurrentH()) {
+		if ((Hk != F->GetCurrentH() || (Hk < maxH)) && (dx < pow(10, -7))) {
 			Hk = F->GetCurrentH();
 		}
 		else {
