@@ -9,7 +9,7 @@ using namespace std;
 
 const double step = 0.001;
 
-#define CRUTCH 1
+#define CRUTCH 0
 
 
 
@@ -243,7 +243,7 @@ double Euler1(double x0, double F0, double x1,  double F1, CFunction *F, double 
 			dx0*=0.5;
 		}
 #if CRUTCH
-		if ((Hk != F->GetCurrentH() || (Hk < maxH)) && (dx < pow(10, -7))) {
+		if ((Hk != F->GetCurrentH() || (Hk < maxH)) && (dErr < pow(10, 28))) {
 			Hk = F->GetCurrentH();
 		}
 		else {
