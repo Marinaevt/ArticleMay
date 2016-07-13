@@ -123,8 +123,8 @@ int main(){
 	foutF << F;
 	cout << exp(x.at(0)) << "," << exp(x.at(1)) << "," << F <<endl;
 	double dm = 0.1, dk = 100;
-	for (double i = dm*2; i <= 0.5; i += dm/100) {
-		for (double j = dk*2; j <= 500; j += dk/100) {
+	for (double i = dm*2; i <= 0.9; i += dm/10) {
+		for (double j = dk*2; j <= 1000; j += dk/10) {
 			x[0] = log(j);
 			x[1] = log(i);
 			equation->Init(x);

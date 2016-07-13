@@ -8,7 +8,7 @@ bool ReadFile(vector<CPoint> &dst){
 	FILE *fp;
 	//fopen_s (&fp,"experiment_AMg_6.txt", "r");   // הכÿ ÀÌד - 6
 	//fopen_s(&fp, "input_sorgente_mod_all.txt", "r");
-	fopen_s(&fp, "dot_plot_2_2.txt", "r");
+	fopen_s(&fp, "dot_plot_4.txt", "r");
 	//fopen_s (&fp,"experiment_P3.txt", "r");
 	//fopen_s (&fp,"experiment_P3.5.txt", "r");
 	//fopen_s (&fp,"experiment_P4.txt", "r");
